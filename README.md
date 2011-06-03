@@ -3,7 +3,7 @@ This is a minimalistic implementation of a (yet another) Growl-like jQuery plugi
 
 Feel free to use it and abuse it!
 
-See documentation on [http://wallin.github.com](homepage)
+See documentation on [homepage](http://wallin.github.com/jquery-growl)
 
 ## Example ##
 
