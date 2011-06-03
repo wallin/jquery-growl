@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="https://github.com/wallin/jquery-growl/raw/master/src/jquery.growl.min.js"></script>
+    <script type="text/javascript" src="growl.js"></script>
+    <style type="text/css">
+      body {
+        font-family: helvetica, arial, sans-serif;
+        font-size: 11px;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin: 0;
+        color: #000;
+      }
+
+      div.wrapper {
+        margin: 0;
+        padding: 50px 0;
+      }
+
+      div.content {
+        width: 640px;
+        margin: 0 auto;
+      }
+
+      div#main_wrapper {
+        background-color: #F0F8FF;
+        border-bottom: 1px solid #ccc;
+      }
+
+      div#main {
+        width: 640px;
+        margin: 0 auto;
+        font-size: 13px;
+        color: #777;
+      }
+
+      a {
+        color: #000;
+        font-weight: bold;
+      }
+
+      div.author {
+        color: #999;
+        font-size: 11px;
+        margin-bottom: 30px;
+      }
+
+      div.download {
+        float: right;
+        display: inline;
+        background-color: #708090;
+        color: #fff;
+        padding: 20px;
+        margin-left: 40px;
+        font-size: 11px;
+
+        /* Round corners */
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin-top: 40px;
+      }
+
+      div.download h2 {
+        margin: 0;
+      }
+
+      div.download a {
+        font-size: 13px;
+        color: #FFA500;
+      }
+
+      /* Usage */
+
+      code, pre {
+        font-family: Consolas, "Courier New", monotype;
+      }
+
+      div.usage {
+        background-color: #eee;
+        padding: 20px;
+      }
+
+      div.usage h3 {
+        border-bottom: 1px solid #B1B1B1;
+        font-size: 15px;
+        margin: 0.2em 0 0 0;
+        padding: 0px 0px 2px 0;
+      }
+
+      div.usage > p {
+        font-size: 13px;
+      }
+
+      div.options {
+        padding: 0 10px;
+      }
+
+      div.options h4 {
+        border-top: 1px solid #DDD;
+        color: #222;
+        font-size: 1.3em;
+        margin: 10px 0 0 0;
+        padding-top: 10px;
+      }
+
+      div.options > p {
+        font-size: 11px;
+        margin: 0.5em 0px;
+      }
+
+      div.options h4 span {
+        float: right;
+        font-size: 11px;
+        font-weight: normal;
+        color: #777;
+      }
+
+
+
+      /* Notifications */
+
+      #EventContainer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 20px 20px 0 0;
+      }
+
+      #EventContainer div.notice-inner {
+        position: relative;
+        width: 200px;
+        padding: 5px 15px 5px 10px;
+        margin:0 0 5px 0;
+        background-color: #000;
+        color: #FFF;
+
+        /* Round corners */
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+
+        /* Opacity */
+        filter:alpha(opacity=50);
+        -moz-opacity:0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+      }
+
+      #EventContainer > div.notice-inner span {
+        cursor: pointer;
+        position: absolute;
+        right: 5px;
+        top: 7px;
+        height: 7px;
+        width: 7px;
+        border: 1px solid #999;
+
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+
+        text-indent: -999px;
+      }
+      #EventContainer > div.notice-inner span:hover {
+        background-color: #AAA;
+      }
+
+      #EventContainer div b {
+        color: #0F0;
+      }
+
+    </style>
+    <title>Notifier</title>
+  </head>
+  <body>
+    <div id="main_wrapper" class="wrapper">
+      <div id="main" class="content">
+        <h1>Minimalistic jQuery Growl plugin v0.1</h1>
+        <div class="author">by: <a href="http://sewa.se">Sebastian Wallin</a></div>
+        <div class="download">
+          <h2>Download</h2>
+          <a href="https://github.com/wallin/jquery-growl/raw/master/src/jquery.growl.js">jquery.growl.js</a> - Source (1.4 KB)<br/>
+          <a href="https://github.com/wallin/jquery-growl/raw/master/src/jquery.growl.min.js">jquery.growl.min.js</a> - Minified (0.7 KB)
+        </div>
+        <p>
+          This is a minimalistic implementation of a (yet another) Growl-like
+          <a href="http://jquery.com">jQuery</a> plugin. I wrote this for a
+          specific purpose where I just needed a simple notification box with
+          as little markup as possible.
+        </p>
+        <p>Feel free to use it and abuse it!</p>
+        <input type="button" value="click me to generate a new message" id="btnNew"/>
+      </div>
+    </div>
+      <div id="usage" class="content">
+        <h2>Usage</h2>
+        <div class="usage">
+          <h3>.notify( options )</h3>
+          <p>
+            <strong>options</strong> Set of key/value pairs the configure the notification.
+            All options are optional (allthough you would probably want to provide
+            the <strong>text</strong> option)
+          </p>
+          <div class="options">
+            <h4>text <span>String</span></h4>
+            <p>The text to be displayed. Can be HTML. </p>
+            <h4>addClass <span>String</span></h4>
+            <p>Adds the specified class to the notification element. </p>
+            <h4>duration <span>Integer</span></h4>
+            <p>How long in milliseconds the notification should be visible. Default value is <code>3000</code></p>
+            <h4>sticky <span>Boolean</span></h4>
+            <p>Sets wether the notification should be cleared by the user or
+              automatically. Default value is <code>false</code>
+            </p>
+          </div>
+        </div>
+        <h2>Example</h2>
+        <pre>
+//Creates a self-removing message in "EventContainer" element;
+$(document).ready(function() {
+  $("#EventContainer").notify({
+    text: "Hello World!"
+  });
+});
+        </pre>
+      </div>
+    <div id="EventContainer"></div>
+  </body>
+</html>
